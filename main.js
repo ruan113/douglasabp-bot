@@ -44,8 +44,8 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
 
   // Meu Id
   // if (newMember.id === "251524294591381506") {
-    // Id do douglas
-    if (newMember.id === "794627937550336030") {
+  // Id do douglas
+  if (newMember.id === "794627937550336030") {
     switch (user.status) {
       case userStatus.connected:
         newMember.channel.leave();
