@@ -1,6 +1,6 @@
 exports.run = (client, message, args) => {
   message.channel.send(`
-  " *Rezemos que os genes do Igor sejam recessivos* "- Douglas, 2018
+  " *Rezemos que os genes do Igor sejam recessivos* "- Mathaus, 2018
     - O universo é cu do Douglas
     - Vai tomar no cu José
     - Onde couberam 5 cabe uma pedra
