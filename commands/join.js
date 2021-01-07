@@ -1,6 +1,6 @@
 exports.run = async (client, message, args) => {
   if (message) {
-    if(message.member.voice.channel) {
+    if (message.member.voice.channel) {
       const voiceChannel = message.member.voice.channel;
       if (!voiceChannel) {
         message.channel.send("You must be in a channel first!");
@@ -15,9 +15,9 @@ exports.run = async (client, message, args) => {
       message.reply("You must be in a voice channel to be banished!");
     }
   } else {
-    const channel = client.channels.cache.get(args.channelID);
-    if (!channel) return console.error("The channel does not exist!");
-    channel
+    const voiceChannel = client.channels.cache.get(args.channelID);
+    if (!voiceChannel) return console.error("The channel does not exist!");
+    voiceChannel
       .join()
       .then((connection) => {
         // Yay, it worked!
