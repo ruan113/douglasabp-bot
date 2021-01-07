@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = "Nzk2NTI1NzQyNzIwMDI0NTg2.X_ZMZw.OfAx-A2r8KJpHCvg-ejce7uYOy0"; //Bot token
 
 const userStatus = {
   connected: "has connected",
@@ -42,7 +41,7 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   }
 });
 
-client.login(token);
+client.login(process.env.TOKEN);
 
 function getStatus(lastChannelID, actualChannelID) {
   return actualChannelID === null
@@ -67,11 +66,11 @@ function connectBotToChannel(channelID) {
     });
 }
 
-function sendMessage(message, channelID) {
-  const channel = client.channels.cache.find(
-    (channel) => channel.id === channelID
-  );
-  console.log(channel);
-  if (!channel) return console.error("The channel does not exist!");
-  channel.send(message);
-}
+// function sendMessage(message, channelID) {
+//   const channel = client.channels.cache.find(
+//     (channel) => channel.id === channelID
+//   );
+//   console.log(channel);
+//   if (!channel) return console.error("The channel does not exist!");
+//   channel.send(message);
+// }
