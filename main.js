@@ -17,7 +17,6 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
-  console.log(message.content)
   let args = message.content.slice(utils.env.PREFIX.length).trim().split(" ");
   let cmd = args.shift().toLowerCase();
 
@@ -43,9 +42,10 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   };
   console.log("user " + user.id + " " + user.status);
 
-  // if (newMember.id === "251524294591381506") { // Meu Id
-  if (newMember.id === "794627937550336030") {
+  // Meu Id
+  // if (newMember.id === "251524294591381506") {
     // Id do douglas
+    if (newMember.id === "794627937550336030") {
     switch (user.status) {
       case userStatus.connected:
         newMember.channel.leave();
@@ -57,8 +57,6 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   }
 });
 
-client.login(utils.env.token || process.env.TOKEN);
-
 function getStatus(lastChannelID, actualChannelID) {
   return actualChannelID === null
     ? userStatus.disconnected
@@ -68,18 +66,12 @@ function getStatus(lastChannelID, actualChannelID) {
 }
 
 function connectBotToChannel(channelID) {
-  const channel = client.channels.cache.get(channelID);
-  if (!channel) return console.error("The channel does not exist!");
-  channel
-    .join()
-    .then((connection) => {
-      // Yay, it worked!
-      console.log("Successfully connected.");
-    })
-    .catch((e) => {
-      // Oh no, it errored! Let's log it to console :)
-      console.error(e);
-    });
+  try {
+    delete require.cache[require.resolve(`./commands/join.js`)];
+    require(`./commands/join.js`).run(client, undefined, { channelID });
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 // function sendMessage(message, channelID) {
@@ -90,3 +82,5 @@ function connectBotToChannel(channelID) {
 //   if (!channel) return console.error("The channel does not exist!");
 //   channel.send(message);
 // }
+
+client.login(utils.env.token || process.env.TOKEN);
