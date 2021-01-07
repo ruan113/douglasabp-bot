@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = "Nzk2NTI1NzQyNzIwMDI0NTg2.X_ZMZw.rfiX0EcR5ljEdmcyHUL6IdjCdlI"; //Bot token
+const token = "Nzk2NTI1NzQyNzIwMDI0NTg2.X_ZMZw.OfAx-A2r8KJpHCvg-ejce7uYOy0"; //Bot token
 
 const userStatus = {
   connected: "has connected",
