@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const utils = require("./utils");
 
 const userStatus = {
   connected: "has connected",
@@ -15,6 +16,24 @@ client.on("ready", () => {
   client.user.setActivity("Cyberpunk 2077");
 });
 
+client.on("message", (message) => {
+  console.log(message.content)
+  let args = message.content.slice(utils.env.PREFIX.length).trim().split(" ");
+  let cmd = args.shift().toLowerCase();
+
+  if (message.author.bot) return;
+  if (!message.content.startsWith(utils.env.PREFIX)) return;
+
+  try {
+    delete require.cache[require.resolve(`./commands/${cmd}.js`)];
+
+    let commandFile = require(`./commands/${cmd}.js`);
+    commandFile.run(client, message, args);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 client.on("voiceStateUpdate", (oldMember, newMember) => {
   let newUserChannel = newMember.channelID;
   let oldUserChannel = oldMember.channelID;
@@ -22,14 +41,11 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
     id: newMember.id,
     status: getStatus(oldUserChannel, newUserChannel),
   };
-
-  // console.log(oldMember);
-  // console.log(newMember);
   console.log("user " + user.id + " " + user.status);
 
-  // if (newMember.id === "251524294591381506") {
+  // if (newMember.id === "251524294591381506") { // Meu Id
   if (newMember.id === "794627937550336030") {
-    sendMessage("teste", "253894435635593217");
+    // Id do douglas
     switch (user.status) {
       case userStatus.connected:
         newMember.channel.leave();
@@ -41,7 +57,7 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   }
 });
 
-client.login(process.env.TOKEN);
+client.login(utils.env.token || process.env.TOKEN);
 
 function getStatus(lastChannelID, actualChannelID) {
   return actualChannelID === null
