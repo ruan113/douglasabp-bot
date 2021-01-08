@@ -24,9 +24,12 @@ client.on("message", (message) => {
   if (message.author.bot || !message.content.startsWith(utils.env.PREFIX))
     return;
 
-  if (Math.floor(Math.random() * Math.floor(100)) < 5) {
+  const refuseVal = Math.floor(Math.random() * Math.floor(100));
+  if (refuseVal < 5) {
     message.channel.send(
-      "https://media.tenor.co/videos/0f2f9bdc85f36003163c4f8d35691cb2/mp4"
+      refuseVal % 2 === 0
+        ? "https://thumbs.gfycat.com/CarelessThankfulFluke-size_restricted.gif"
+        : "https://media2.giphy.com/media/Ju7l5y9osyymQ/giphy.gif"
     );
     return;
   }
