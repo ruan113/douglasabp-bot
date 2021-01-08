@@ -21,8 +21,8 @@ client.on("message", (message) => {
   let args = message.content.slice(utils.env.PREFIX.length).trim().split(" ");
   let cmd = args.shift().toLowerCase();
 
-  if (message.author.bot) return;
-  if (!message.content.startsWith(utils.env.PREFIX)) return;
+  if (message.author.bot || !message.content.startsWith(utils.env.PREFIX))
+    return;
 
   if (Math.floor(Math.random() * Math.floor(100)) < 5) {
     message.channel.send(
