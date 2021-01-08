@@ -19,9 +19,7 @@ client.on("ready", () => {
 client.on("message", (message) => {
   let args = message.content.slice(utils.env.PREFIX.length).trim().split(" ");
   let cmd = args.shift().toLowerCase();
-  console.log(message.content)
-  console.log(args)
-  console.log(cmd)
+ 
   if (message.author.bot) return;
   if (!message.content.startsWith(utils.env.PREFIX)) return;
 
