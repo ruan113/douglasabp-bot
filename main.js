@@ -15,6 +15,15 @@ client.once("ready", () => {
 
 client.on("ready", () => {
   client.user.setActivity("Cyberpunk 2077");
+  const psgGuild = client.guilds.cache.find(
+    (guild) => guild.id === utils.env.psgId
+  );
+  const isDouglasOnline = psgGuild.members.cache.find(
+    (it) => it.user.id === utils.env.douglasUserId
+  );
+  if (!isDouglasOnline) {
+    connectBotToChannel("253894435635593217");
+  }
 });
 
 client.on("message", (message) => {
@@ -57,9 +66,9 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   console.log("user " + user.id + " " + user.status);
 
   // Meu Id
-  // if (newMember.id === "251524294591381506") {
+  // if (newMember.id === utils.env.ruanUserId) {
   // Id do douglas
-  if (newMember.id === "794627937550336030") {
+  if (newMember.id === utils.env.douglasUserId) {
     switch (user.status) {
       case userStatus.connected:
         newMember.channel.leave();
