@@ -1,16 +1,12 @@
 const Discord = require("discord.js");
-const { command } = require("./commands/join");
+
 const client = new Discord.Client();
+
+const { command } = require("./commands/join");
 const utils = require("./utils");
 
-const userStatus = {
-  connected: "has connected",
-  disconnected: "has disconnected",
-  unknown: "has a unknown state",
-};
-
 client.once("ready", () => {
-  console.log(`Bot ready, logged in as ${client.user.tag}!`);
+  utils.log(`Bot ready, logged in as ${client.user.tag}!`);
 });
 
 client.on("ready", () => {
@@ -52,7 +48,7 @@ client.on("message", (message) => {
     message.channel.send(
       "Invalid Command - if you need help, try +list to see the command list."
     );
-    console.log(e);
+    utils.log(e);
   }
 });
 
@@ -61,19 +57,22 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
   let oldUserChannel = oldMember.channelID;
   const user = {
     id: newMember.id,
+    name: newMember.guild.members.cache.find((it) => {
+      return it.id === newMember.id;
+    }).user.username,
     status: getStatus(oldUserChannel, newUserChannel),
   };
-  console.log("user " + user.id + " " + user.status);
+  utils.log("user " + user.name + "(" + user.id + ") " + user.status);
 
   // Meu Id
   // if (newMember.id === utils.env.ruanUserId) {
   // Id do douglas
   if (newMember.id === utils.env.douglasUserId) {
     switch (user.status) {
-      case userStatus.connected:
+      case utils.userStatus.connected:
         newMember.channel.leave();
         break;
-      case userStatus.disconnected:
+      case utils.userStatus.disconnected:
         connectBotToChannel("253894435635593217");
         break;
     }
@@ -82,10 +81,10 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
 
 function getStatus(lastChannelID, actualChannelID) {
   return actualChannelID === null
-    ? userStatus.disconnected
+    ? utils.userStatus.disconnected
     : lastChannelID === null
-    ? userStatus.connected
-    : userStatus.unknown;
+    ? utils.userStatus.connected
+    : utils.userStatus.unknown;
 }
 
 function connectBotToChannel(channelID) {
@@ -93,7 +92,7 @@ function connectBotToChannel(channelID) {
     delete require.cache[require.resolve(`./commands/join.js`)];
     require(`./commands/join.js`).command.run(client, undefined, { channelID });
   } catch (e) {
-    console.log(e);
+    utils.log(e);
   }
 }
 
@@ -101,8 +100,8 @@ function connectBotToChannel(channelID) {
 //   const channel = client.channels.cache.find(
 //     (channel) => channel.id === channelID
 //   );
-//   console.log(channel);
-//   if (!channel) return console.error("The channel does not exist!");
+//   utils.log(channel);
+//   if (!channel) return error("The channel does not exist!");
 //   channel.send(message);
 // }
 
