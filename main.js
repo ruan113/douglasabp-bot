@@ -62,7 +62,8 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
     }).user.username,
     status: getStatus(oldUserChannel, newUserChannel),
   };
-  utils.log("user " + user.name + "(" + user.id + ") " + user.status);
+
+  utils.log("user " + user.name + "(" + user.id + ") " + user.status, user.status === utils.userStatus.unknown);
 
   // Meu Id
   // if (newMember.id === utils.env.ruanUserId) {
