@@ -15,6 +15,9 @@ exports.command = {
     await message.delete();
 
     message.channel.bulkDelete(args[0], true).then(() => {
+      utils.log(
+        `***The Admin ${message.member.user.username} has Deleted ${args[0]} messages***`
+      );
       message.channel.send(
         `***The Admin ${message.member.user.username} has Deleted ${args[0]} messages***`
       );
