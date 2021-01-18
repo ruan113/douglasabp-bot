@@ -3,12 +3,8 @@ exports.command = {
   description: "It makes Douglas say something that you want.",
   run: (client, message, args) => {
     // APAGAR A MSG QUE USUÁRIO MANDOU
-    msg = "";
     if (args.length > 0) {
-      args.forEach((it) => {
-        msg += it + " ";
-      });
-
+      const msg = args.slice(1).join(" ");
       message.channel.send(msg, {
         tts: true,
       });
