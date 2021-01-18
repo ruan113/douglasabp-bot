@@ -4,7 +4,7 @@ exports.command = {
   run: (client, message, args) => {
     // APAGAR A MSG QUE USUÁRIO MANDOU
     if (args.length > 0) {
-      const msg = args.slice(1).join(" ");
+      const msg = args.join(" ");
       message.channel.send(msg, {
         tts: true,
       });
