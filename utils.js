@@ -1,6 +1,7 @@
-fs = require("fs");
+const fs = require("fs");
+const moment = require("moment");
 
-exports.env = { 
+exports.env = {
   PREFIX: "+",
   psgId: "253894435635593216",
   douglasUserId: "794627937550336030",
@@ -36,10 +37,7 @@ exports.log = function (msg, ignore = false) {
     }
 
     while (logs.length > 9) logs.splice(0, 1);
-    const date =
-      new Date().toISOString().slice(0, 10) +
-      "  " +
-      new Date().toISOString().slice(11, 19);
+    const date = moment().format("hh:mm:ss DD/MM/YYYY");
     logs.push(date + "\t-\t" + msg);
 
     let string = "";
