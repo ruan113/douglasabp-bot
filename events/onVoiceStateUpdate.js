@@ -71,8 +71,8 @@ module.exports = (client) => {
 
   function connectBotToChannel(channelID) {
     try {
-      delete require.cache[require.resolve(`./commands/join.js`)];
-      require(`./commands/join.js`).command.run(client, undefined, { channelID });
+      delete require.cache[require.resolve(`./../commands/join.js`)];
+      require(`./../commands/join.js`).command.run(client, undefined, { channelID });
     } catch (e) {
       utils.log(e);
     }
