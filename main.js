@@ -21,7 +21,9 @@ client.on("ready", () => {
   if (!isDouglasOnline) {
     try {
       delete require.cache[require.resolve(`./commands/join.js`)];
-      require(`./commands/join.js`).command.run(client, undefined, { channelID: '253894435635593217' });
+      require(`./commands/join.js`).command.run(client, undefined, {
+        channelID: "253894435635593217",
+      });
     } catch (e) {
       utils.log(e);
     }
