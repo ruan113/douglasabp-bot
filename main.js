@@ -19,7 +19,12 @@ client.on("ready", () => {
     (it) => it.user.id === utils.env.douglasUserId
   );
   if (!isDouglasOnline) {
-    connectBotToChannel("253894435635593217");
+    try {
+      delete require.cache[require.resolve(`./commands/join.js`)];
+      require(`./commands/join.js`).command.run(client, undefined, { channelID: '253894435635593217' });
+    } catch (e) {
+      utils.log(e);
+    }
   }
 
   // Initialize events
