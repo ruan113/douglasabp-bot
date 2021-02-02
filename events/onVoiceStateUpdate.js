@@ -1,4 +1,4 @@
-const utils = require('./../utils')
+const utils = require("./../utils");
 
 module.exports = (client) => {
   client.on("voiceStateUpdate", (oldMember, newMember) => {
@@ -31,7 +31,14 @@ module.exports = (client) => {
             newMember.channel.leave();
             break;
           case utils.userStatus.disconnected:
-            connectBotToChannel("253894435635593217");
+            try {
+              delete require.cache[require.resolve(`./../commands/join.js`)];
+              require(`./../commands/join.js`).command.run(client, undefined, {
+                channelID: "253894435635593217",
+              });
+            } catch (e) {
+              utils.log(e);
+            }
             break;
         }
       }
@@ -41,8 +48,7 @@ module.exports = (client) => {
   });
 
   function handleChange(oldMember, newMember, user) {
-    if (user.id === client.user.id)
-      return;
+    if (user.id === client.user.id) return;
     // Here I'm getting the channel, just replace VVV this VVV with the channel's ID
     let textChannel = oldMember.guild.channels.cache.get("253894435635593216");
     if (!textChannel) throw new Error("That channel does not exist.");
@@ -65,16 +71,7 @@ module.exports = (client) => {
     return actualChannelID === null
       ? utils.userStatus.disconnected
       : lastChannelID === null
-        ? utils.userStatus.connected
-        : utils.userStatus.unknown;
+      ? utils.userStatus.connected
+      : utils.userStatus.unknown;
   }
-
-  function connectBotToChannel(channelID) {
-    try {
-      delete require.cache[require.resolve(`./../commands/join.js`)];
-      require(`./../commands/join.js`).command.run(client, undefined, { channelID });
-    } catch (e) {
-      utils.log(e);
-    }
-  }
-}
+};
