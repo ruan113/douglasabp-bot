@@ -6,12 +6,10 @@ const utils = require("./utils");
 const onMessage = require("./events/onMessage");
 const onVoiceStateUpdate = require("./events/onVoiceStateUpdate");
 
-client.once("ready", () => {
-  utils.log(`Bot ready, logged in as ${client.user.tag}!`);
-});
-
 client.on("ready", () => {
-  client.user.setActivity("Cyberpunk 2077");
+  utils.log(`Bot ready, logged in as ${client.user.tag}!`);
+
+  client.user.setActivity(getGame());
   const psgGuild = client.guilds.cache.find(
     (guild) => guild.id === utils.env.psgId
   );
@@ -33,5 +31,36 @@ client.on("ready", () => {
   onMessage(client);
   onVoiceStateUpdate(client);
 });
+
+function getGame() {
+  let game;
+  switch (Math.floor(Math.random() * Math.floor(8))) {
+    case 0:
+      game = "The Witcher 3: Wild Hunt";
+      break;
+    case 1:
+      game = "Minion Masters";
+      break;
+    case 2:
+      game = "Cyberpunk 2077";
+      break;
+    case 3:
+      game = "War Thunder";
+      break;
+    case 4:
+      game = "Metro Exodus";
+      break;
+    case 5:
+      game = "Fallout 4";
+      break;
+    case 6:
+      game = "Assassin's Creed IV Black Flag";
+      break;
+    case 7:
+      game = "The Elder Scrolls V: Skyrim Special Edition";
+      break;
+  }
+  return game;
+}
 
 client.login(utils.env.token || process.env.TOKEN);
