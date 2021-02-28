@@ -38,34 +38,8 @@ client.on("ready", () => {
 });
 
 function getGame() {
-  let game;
-  switch (Math.floor(Math.random() * Math.floor(8))) {
-    case 0:
-      game = "The Witcher 3: Wild Hunt";
-      break;
-    case 1:
-      game = "Minion Masters";
-      break;
-    case 2:
-      game = "Cyberpunk 2077";
-      break;
-    case 3:
-      game = "War Thunder";
-      break;
-    case 4:
-      game = "Metro Exodus";
-      break;
-    case 5:
-      game = "Fallout 4";
-      break;
-    case 6:
-      game = "Assassin's Creed IV Black Flag";
-      break;
-    case 7:
-      game = "The Elder Scrolls V: Skyrim Special Edition";
-      break;
-  }
-  return game;
+  let games = utils.gameList;
+  return games[Math.floor(Math.random() * games.length)];
 }
 
 client.login(utils.env.token || process.env.TOKEN);

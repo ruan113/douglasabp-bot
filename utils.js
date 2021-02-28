@@ -15,6 +15,25 @@ exports.userStatus = {
   unknown: "has a unknown state",
 };
 
+exports.gameList = [
+  "The Witcher 3: Wild Hunt",
+  "Minion Masters",
+  "Cyberpunk 2077",
+  "War Thunder",
+  "Metro Exodus",
+  "Fallout 4",
+  "Assassin's Creed IV Black Flag",
+  "The Elder Scrolls V: Skyrim Special Edition",
+  "Mass Effect 2",
+  "Mass Effect 3",
+  "CrossCode",
+  "Starbound",
+  "FTL: Faster Than Light",
+  "Fable Anniversary",
+  "Chrono Trigger",
+  "FINAL FANTASY IX",
+];
+
 /*
  params:
   - msg: message that will be logged or displayed on console.
@@ -24,7 +43,7 @@ exports.log = function (msg, ignore = false) {
   console.log(msg);
   let logs = [];
 
-  if(ignore) {
+  if (ignore) {
     return;
   }
  
