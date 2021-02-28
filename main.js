@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const utils = require("./utils");
+const moment = require("moment");
 
 // eventos
 const onMessage = require("./events/onMessage");
@@ -10,6 +11,10 @@ client.on("ready", () => {
   utils.log(`Bot ready, logged in as ${client.user.tag}!`);
 
   client.user.setActivity(getGame());
+  setInterval(() => {
+    client.user.setActivity(getGame());
+  }, moment.duration(12, "hours").asMilliseconds());
+
   const psgGuild = client.guilds.cache.find(
     (guild) => guild.id === utils.env.psgId
   );
