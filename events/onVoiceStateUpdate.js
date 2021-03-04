@@ -36,6 +36,11 @@ module.exports = (client) => {
               require(`./../commands/join.js`).command.run(client, undefined, {
                 channelID: "253894435635593217",
               });
+              newMember.guild.channels.cache
+                .find((it) => it.id === "253894435635593216")
+                .send("Oh shit, here we go again", {
+                  tts: true,
+                });
             } catch (e) {
               utils.log(e);
             }
