@@ -34,6 +34,15 @@ exports.gameList = [
   "FINAL FANTASY IX",
 ];
 
+exports.refuseGifs = [
+  "https://thumbs.gfycat.com/CarelessThankfulFluke-size_restricted.gif",
+  "https://media2.giphy.com/media/Ju7l5y9osyymQ/giphy.gif",
+  "https://gfycat.com/frayedcircularcattle",
+  "https://media1.giphy.com/media/4bpK2k0Yru5Us/200.gif",
+  "https://media.tenor.com/images/c336d9b6845eac3b94ea727dd320f637/tenor.gif",
+  "https://media3.giphy.com/media/cm5UUDclHfbgZYk1SW/200.gif",
+]
+
 /*
  params:
   - msg: message that will be logged or displayed on console.
